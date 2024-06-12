@@ -1,4 +1,4 @@
-"use strict";
+
 function generateRandomValue(minValue, maxValue) {
     var random = Math.random();
     //TODO: use random to generate a number between min and max

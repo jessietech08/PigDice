@@ -38,6 +38,16 @@ function createNewGame() {
 }
 function rollDie() {
     let currTotal = parseInt(document.getElementById("total").value);
+    let roll = generateRandomValue(1, 6);
+    if (roll == 1) {
+        changePlayers();
+        currTotal = 0;
+    }
+    else {
+        currTotal += roll;
+    }
+    document.getElementById("die").value = roll.toString();
+    document.getElementById("total").value = currTotal.toString();
 }
 function holdDie() {
     changePlayers();

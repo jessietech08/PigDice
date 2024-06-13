@@ -1,5 +1,8 @@
 function generateRandomValue(minValue, maxValue) {
     var random = Math.random();
+    var range = maxValue - minValue + 1;
+    random = random * range;
+    random = Math.floor(random) + minValue;
     return random;
 }
 function changePlayers() {

@@ -1,7 +1,11 @@
 function generateRandomValue(minValue:number, maxValue:number):number{
+    // sets random to floating point between 0 and 1
     var random = Math.random();
-     
-    //TODO: use random to generate a number between min and max
+    
+    // sets range of 6
+    var range = maxValue - minValue + 1;
+    random = random * range;
+    random = Math.floor(random) + minValue;
 
     return random;
 }

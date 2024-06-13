@@ -48,14 +48,17 @@ function createNewGame(){
     if (!player1Name || !player2Name) {
         alert("Both players must enter a name");
     }
+    else {
+        //if both players do have a name start the game!
+        (<HTMLElement>document.getElementById("turn")).classList.add("open");
+        (<HTMLInputElement>document.getElementById("total")).value = "0";
+        //lock in player names and then change players
+        (<HTMLInputElement>document.getElementById("player1")).setAttribute("disabled", "disabled");
+        (<HTMLInputElement>document.getElementById("player2")).setAttribute("disabled", "disabled");
+        changePlayers();
+    }
 
-    //if both players do have a name start the game!
-    (<HTMLElement>document.getElementById("turn")).classList.add("open");
-    (<HTMLInputElement>document.getElementById("total")).value = "0";
-    //lock in player names and then change players
-    (<HTMLInputElement>document.getElementById("player1")).setAttribute("disabled", "disabled");
-    (<HTMLInputElement>document.getElementById("player2")).setAttribute("disabled", "disabled");
-    changePlayers();
+    
 }
 
 function rollDie():void{
@@ -98,16 +101,18 @@ function holdDie():void{
     // add the current turn total to the player's total score
     if (currPlayer == player1Name) {
         player1Score += currTotal;
-        (document.getElementById("score1") as HTMLInputElement).value = (player1Score + currTotal).toString();
+        (document.getElementById("score1") as HTMLInputElement).value = (player1Score).toString();
         if (player1Score >= winner) {
             alert("PLAYER " + player1Name + " WON GGS!");
+            restartGame();
         }
     }
     else {
         player2Score += currTotal;
-        (document.getElementById("score2") as HTMLInputElement).value = (player2Score + currTotal).toString();
+        (document.getElementById("score2") as HTMLInputElement).value = (player2Score).toString();
         if (player2Score >= winner) {
             alert("PLAYER " + player2Name + " WON GGS!");
+            restartGame();
         }
     }
     
@@ -116,4 +121,18 @@ function holdDie():void{
 
     // change players
     changePlayers();
+}
+
+function restartGame():void {
+    (document.getElementById("score1") as HTMLInputElement).value = '0';
+    (document.getElementById("score2") as HTMLInputElement).value = '0';
+    (document.getElementById("total") as HTMLInputElement).value = '0';
+
+    (document.getElementById("player1") as HTMLInputElement).value = '';
+    (document.getElementById("player2") as HTMLInputElement).value = '';
+
+    (document.getElementById("player1") as HTMLInputElement).removeAttribute("disabled");
+    (document.getElementById("player2") as HTMLInputElement).removeAttribute("disabled");
+
+    (document.getElementById("turn")).classList.remove("open");
 }

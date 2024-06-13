@@ -30,11 +30,13 @@ function createNewGame() {
     if (!player1Name || !player2Name) {
         alert("Both players must enter a name");
     }
-    document.getElementById("turn").classList.add("open");
-    document.getElementById("total").value = "0";
-    document.getElementById("player1").setAttribute("disabled", "disabled");
-    document.getElementById("player2").setAttribute("disabled", "disabled");
-    changePlayers();
+    else {
+        document.getElementById("turn").classList.add("open");
+        document.getElementById("total").value = "0";
+        document.getElementById("player1").setAttribute("disabled", "disabled");
+        document.getElementById("player2").setAttribute("disabled", "disabled");
+        changePlayers();
+    }
 }
 function rollDie() {
     let currTotal = parseInt(document.getElementById("total").value);
@@ -59,18 +61,30 @@ function holdDie() {
     let player2Score = parseInt(document.getElementById("score2").value) || 0;
     if (currPlayer == player1Name) {
         player1Score += currTotal;
-        document.getElementById("score1").value = (player1Score + currTotal).toString();
+        document.getElementById("score1").value = (player1Score).toString();
         if (player1Score >= winner) {
             alert("PLAYER " + player1Name + " WON GGS!");
+            restartGame();
         }
     }
     else {
         player2Score += currTotal;
-        document.getElementById("score2").value = (player2Score + currTotal).toString();
+        document.getElementById("score2").value = (player2Score).toString();
         if (player2Score >= winner) {
             alert("PLAYER " + player2Name + " WON GGS!");
+            restartGame();
         }
     }
     document.getElementById("total").value = '0';
     changePlayers();
+}
+function restartGame() {
+    document.getElementById("score1").value = '0';
+    document.getElementById("score2").value = '0';
+    document.getElementById("total").value = '0';
+    document.getElementById("player1").value = '';
+    document.getElementById("player2").value = '';
+    document.getElementById("player1").removeAttribute("disabled");
+    document.getElementById("player2").removeAttribute("disabled");
+    (document.getElementById("turn")).classList.remove("open");
 }

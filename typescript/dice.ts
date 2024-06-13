@@ -84,11 +84,35 @@ function rollDie():void{
 }
 
 function holdDie():void{
+    let winner:number = 100;
     // get the current turn total
+    let currTotal = parseInt((document.getElementById("total") as HTMLInputElement).value) || 0;
     // determine who the current player is
-    // add the current turn total to the player's total score
+    let currPlayer = document.getElementById("current").innerText;
+    let player1Name = (document.getElementById("player1") as HTMLInputElement).value;
+    let player2Name = (document.getElementById("player2") as HTMLInputElement).value;
 
+    let player1Score = parseInt((document.getElementById("score1") as HTMLInputElement).value) || 0;
+    let player2Score = parseInt((document.getElementById("score2") as HTMLInputElement).value) || 0;
+
+    // add the current turn total to the player's total score
+    if (currPlayer == player1Name) {
+        player1Score += currTotal;
+        (document.getElementById("score1") as HTMLInputElement).value = (player1Score + currTotal).toString();
+        if (player1Score >= winner) {
+            alert("PLAYER " + player1Name + " WON GGS!");
+        }
+    }
+    else {
+        player2Score += currTotal;
+        (document.getElementById("score2") as HTMLInputElement).value = (player2Score + currTotal).toString();
+        if (player2Score >= winner) {
+            alert("PLAYER " + player2Name + " WON GGS!");
+        }
+    }
+    
     // reset the turn total to 0
+    (document.getElementById("total") as HTMLInputElement).value = '0';
 
     // change players
     changePlayers();

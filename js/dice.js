@@ -50,5 +50,27 @@ function rollDie() {
     document.getElementById("total").value = currTotal.toString();
 }
 function holdDie() {
+    let winner = 100;
+    let currTotal = parseInt(document.getElementById("total").value) || 0;
+    let currPlayer = document.getElementById("current").innerText;
+    let player1Name = document.getElementById("player1").value;
+    let player2Name = document.getElementById("player2").value;
+    let player1Score = parseInt(document.getElementById("score1").value) || 0;
+    let player2Score = parseInt(document.getElementById("score2").value) || 0;
+    if (currPlayer == player1Name) {
+        player1Score += currTotal;
+        document.getElementById("score1").value = (player1Score + currTotal).toString();
+        if (player1Score >= winner) {
+            alert("PLAYER " + player1Name + " WON GGS!");
+        }
+    }
+    else {
+        player2Score += currTotal;
+        document.getElementById("score2").value = (player2Score + currTotal).toString();
+        if (player2Score >= winner) {
+            alert("PLAYER " + player2Name + " WON GGS!");
+        }
+    }
+    document.getElementById("total").value = '0';
     changePlayers();
 }
